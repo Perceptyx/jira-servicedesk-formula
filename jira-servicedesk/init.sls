@@ -1,4 +1,5 @@
-{%- from 'jira-servicedesk/conf/settings.sls' import jira with context %}
+{%- from 'jira-servicedesk/conf/jira_settings.sls' import jira with context %}
+{%- from 'jira-servicedesk/conf/confluence_settings.sls' import confluence with context %}
 
 include:
   - sun-java
@@ -6,6 +7,9 @@ include:
   - mysql
   - mysql.remove_test_database
   - nginx.ng
+{% if confluence.install == True %}
+  - .confluence
+{% endif %}
 
 jira:
   group:
@@ -213,3 +217,5 @@ logrotate-jira-tomcat:
     - template: jinja
     - context:
       jira: {{ jira|json }}
+
+
