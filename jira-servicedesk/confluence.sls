@@ -55,16 +55,32 @@ confluence-properties-file:
     - context:
       confluence: {{ confluence|json }}
 
-#{{ confluence.home }}/confluence.cfg.xml:
-#  file.managed:
-#    - source: salt://jira-servicedesk/templates/confluence.cfg.xml.tmpl
-#    - user: {{ confluence.user }}
-#    - group: {{ confluence.user }}
-#    - template: jinja
-#    - listen_in:
-#      - module: confluence-restart
-#    - context:
-#      confluence: {{ confluence|json }}
+
+{%if confluence.confluence_cfg_xml is defined %}
+{{ confluence.home }}/confluence.cfg.xml:
+  file.managed:
+    - user: {{ confluence.user }}
+    - group: {{ confluence.user }}
+    - listen_in:
+      - module: confluence-restart
+    - contents: {{ confluence.confluence_cfg_xml }}
+{% endif %}
+
+{% if confluence.use_https == True %}
+confluence-https-replace:
+  file.replace:
+    - name: {{ confluence.prefix }}/confluence/conf/server.xml
+    - pattern:  '\<Connector port=\"8090\"[^\n]*'
+    - repl: '<Connector port="8090" connectionTimeout="20000" redirectPort="8443" proxyName="{{ confluence.confluence_hostname }}" proxyPort="443" scheme="https" secure="true"'
+{% else %}
+confluence-https-replace:
+  file.replace:
+    - name: {{ confluence.prefix }}/confluence/conf/server.xml
+    - pattern:  '\<Connector port="8090"[^\n]+'
+    - repl: '<Connector port="8090" connectionTimeout="20000" redirectPort="8443" proxyName="{{ confluence.confluence_hostname }}" proxyPort="80"'
+{% endif %}
+
+
 
 confluence-unpack-mysql-tarball:
   archive.extracted:

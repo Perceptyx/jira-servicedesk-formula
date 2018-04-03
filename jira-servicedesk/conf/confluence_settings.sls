@@ -31,6 +31,8 @@
 
 {%- set default_use_https   = false %}
 
+{%- set default_confluence_cfg_xml   = '' %}
+
 
 {%- set install        = g.get('install', p.get('install', default_install)) %}
 {%- set version        = g.get('version', p.get('version', default_version)) %}
@@ -57,6 +59,8 @@
 {%- set confluence_hostname     = g.get('confluence_hostname', p.get('confluence_hostname', default_confluence_hostname)) %}
 
 {%- set use_https     = g.get('use_https', p.get('use_https', default_use_https)) %}
+
+{%- set confluence_cfg_xml     = g.get('confluence_cfg_xml', p.get('confluence_cfg_xml', default_confluence_cfg_xml)) %}
 
 
 
@@ -93,6 +97,7 @@
                       'confluence_hostname'  : confluence_hostname,
                       'use_https'      : use_https,
                       'mysql_location' : mysql_location,
+                      'confluence_cfg_xml': confluence_cfg_xml,
                       'mysql_connector_version': mysql_connector_version
                   }) %}
 
