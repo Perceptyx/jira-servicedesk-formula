@@ -136,3 +136,16 @@ confluence-stop:
   module.wait:
     - name: service.stop
     - m_name: confluence
+
+logrotate-confluence-tomcat:
+  file.managed:
+    - name: '/etc/logrotate.d/confluence-tomcat.conf'
+    - source: salt://jira-servicedesk/templates/logrotate-confluence-tomcat.tmpl
+    - user: root
+    - group: root
+    - mode: 0644
+    - require:
+      - pkg: logrotate
+    - template: jinja
+    - context:
+      confluence: {{ confluence|json }}

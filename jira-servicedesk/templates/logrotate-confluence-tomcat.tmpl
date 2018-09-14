@@ -1,0 +1,9 @@
+{{ confluence.prefix }}/confluence/logs/catalina.out {
+    rotate 5
+    size 50M
+    compress
+    notifempty
+    missingok
+    copytruncate
+    su confluence confluence
+}
