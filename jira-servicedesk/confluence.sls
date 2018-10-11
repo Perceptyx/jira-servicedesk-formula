@@ -19,6 +19,7 @@ unpack-confluence-tarball:
     - skip_verify: true
     - user: confluence
     - options: z
+    - trim_output: true
     - if_missing: {{ confluence.prefix }}/atlassian-confluence-{{ confluence.version }}
     - keep: True
     - require:
@@ -90,6 +91,7 @@ confluence-unpack-mysql-tarball:
     - archive_format: tar
     - user: confluence
     - options: z
+    - trim_output: true
     - if_missing: {{ confluence.prefix }}/confluence/confluence/WEB-INF/lib/mysql-connector-java-{{ confluence.mysql_connector_version }}-bin.jar
     - keep: True
 
