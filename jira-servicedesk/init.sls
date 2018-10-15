@@ -29,7 +29,6 @@ unpack-jira-tarball:
     - archive_format: tar
     - skip_verify: true
     - user: jira
-    - options: z
     - trim_output: true
     {% if jira.app_name == 'atlassian-servicedesk' %}
     - if_missing: {{ jira.prefix }}/atlassian-jira-servicedesk-{{ jira.version }}-standalone
@@ -63,6 +62,8 @@ create-logs-symlink:
     - backupname: {{ jira.prefix }}/jira/old_logs
     - watch:
       - archive: unpack-jira-tarball
+    - require:
+      - file: fix-jira-filesystem-permissions
 
 unpack-mysql-tarball:
   archive.extracted:
@@ -71,7 +72,6 @@ unpack-mysql-tarball:
     - skip_verify: true
     - archive_format: tar
     - user: jira
-    - options: z
     - trim_output: true
     - if_missing: {{ jira.prefix }}/jira/lib/mysql-connector-java-{{ jira.mysql_connector_version }}-bin.jar
     - keep: True
@@ -105,6 +105,8 @@ fix-jira-filesystem-permissions:
       - {{ jira.home }}
       - {{ jira.log_root }}
     - watch:
+      - archive: unpack-jira-tarball
+    - require:
       - archive: unpack-jira-tarball
 
 systemd-system-dir:
