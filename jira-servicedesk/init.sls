@@ -171,13 +171,13 @@ jira-https-replace:
   file.replace:
     - name: {{ jira.prefix }}/jira/conf/server.xml
     - pattern:  '\<Connector port=\"8080\"[^\n]*'
-    - repl: '<Connector port="8080" proxyName="{{ jira.jira_hostname }}" proxyPort="443" scheme="https" secure="true"'
+    - repl: '<Connector port="8080" proxyName="{{ jira.jira_hostname }}" proxyPort="443" scheme="https" secure="true" relaxedPathChars="[]|" relaxedQueryChars="[]|{}^&#x5c;&#x60;&quot;&lt;&gt;"'
 {% else %}
 jira-https-replace:
   file.replace:
     - name: {{ jira.prefix }}/jira/conf/server.xml
     - pattern:  '\<Connector port="8080"[^\n]+'
-    - repl: '<Connector port="8080" proxyName="{{ jira.jira_hostname }}" proxyPort="80"'
+    - repl: '<Connector port="8080" proxyName="{{ jira.jira_hostname }}" proxyPort="80" relaxedPathChars="[]|" relaxedQueryChars="[]|{}^&#x5c;&#x60;&quot;&lt;&gt;"'
 {% endif %}
 
 jvm-min-memory:

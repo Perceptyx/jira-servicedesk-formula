@@ -3,7 +3,7 @@
 
 
 
-{%- set default_version      = '3.2.4' %}
+{%- set default_version      = '3.16.0' %}
 {%- set default_prefix       = '/opt' %}
 {%- set default_app_name       = 'atlassian-servicedesk' %}
 
