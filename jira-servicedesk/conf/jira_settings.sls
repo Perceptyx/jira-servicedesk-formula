@@ -3,11 +3,11 @@
 
 
 
-{%- set default_version      = '3.16.0' %}
+{%- set default_version      = '4.0.2' %}
 {%- set default_prefix       = '/opt' %}
 {%- set default_app_name       = 'atlassian-servicedesk' %}
 
-{%- set default_source_url   = 'https://downloads.atlassian.com/software/jira/downloads' %}
+{%- set default_source_url   = 'https://product-downloads.atlassian.com/software/jira/downloads' %}
 {%- set default_log_root     = '/var/log/jira' %}
 {%- set default_jira_user    = 'jira' %}
 {%- set default_jira_group   = 'jira' %}
@@ -23,7 +23,7 @@
 {%- set default_jvm_MaxPermSize = '384m' %}
 
 
-{%- set default_mysql_connector_version = '5.1.40' %}
+{%- set default_mysql_connector_version = '5.1.47' %}
 {%- set default_mysql_location = 'http://dev.mysql.com/get/Downloads/Connector-J/' %}
 {%- set default_db_type      = 'postgresql72' %}
 {%- set default_db_driver    = 'org.postgresql.Driver' %}

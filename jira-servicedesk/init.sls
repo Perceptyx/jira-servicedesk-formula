@@ -49,7 +49,10 @@ create-jira-symlink:
     - target: {{ jira.prefix }}/atlassian-jira-servicedesk-{{ jira.version }}-standalone
     {% elif jira.app_name == 'jira' %}
     - target: {{ jira.prefix }}/atlassian-jira-{{ jira.version }}-standalone
+    {% elif jira.app_name == 'atlassian-jira-software' %}
+    - target: {{ jira.prefix }}/atlassian-jira-software-{{ jira.version }}-standalone
     {% endif %}
+
     - user: jira
     - watch:
       - archive: unpack-jira-tarball
@@ -79,7 +82,7 @@ unpack-mysql-tarball:
 mysql-jar-copy:
   file.copy:
     - name: {{ jira.prefix }}/jira/lib/mysql-connector-java-{{ jira.mysql_connector_version }}-bin.jar
-    - source: /tmp/mysql-connector-java-5.1.40/mysql-connector-java-{{ jira.mysql_connector_version }}-bin.jar
+    - source: /tmp/mysql-connector-java-{{ jira.mysql_connector_version }}/mysql-connector-java-{{ jira.mysql_connector_version }}-bin.jar
     - user: jira
     - require:
       - module: jira-stop
