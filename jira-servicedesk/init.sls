@@ -36,6 +36,7 @@ unpack-jira-tarball:
     - if_missing: {{ jira.prefix }}/atlassian-jira-{{ jira.version }}-standalone
     {% endif %}
     - keep: True
+    - force: True
     - require:
       - module: jira-stop
       - file: jira-init-script
@@ -57,12 +58,14 @@ create-jira-symlink:
     - watch:
       - archive: unpack-jira-tarball
 
+
 create-logs-symlink:
   file.symlink:
     - name: {{ jira.prefix }}/jira/logs
     - target: {{ jira.log_root }}
     - user: jira
     - backupname: {{ jira.prefix }}/jira/old_logs
+    - force: true 
     - watch:
       - archive: unpack-jira-tarball
     - require:
