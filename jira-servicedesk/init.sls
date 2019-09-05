@@ -34,6 +34,8 @@ unpack-jira-tarball:
     - if_missing: {{ jira.prefix }}/atlassian-jira-servicedesk-{{ jira.version }}-standalone
     {% elif jira.app_name == 'jira' %}
     - if_missing: {{ jira.prefix }}/atlassian-jira-{{ jira.version }}-standalone
+    {% elif jira.app_name == 'atlassian-jira-software' %}
+    - if_missing: {{ jira.prefix }}/atlassian-jira-software-{{ jira.version }}-standalone
     {% endif %}
     - keep: True
     - force: True
@@ -107,6 +109,8 @@ fix-jira-filesystem-permissions:
       - {{ jira.prefix }}/atlassian-jira-servicedesk-{{ jira.version }}-standalone
     {% elif jira.app_name == 'jira' %}
       - {{ jira.prefix }}/atlassian-jira-{{ jira.version }}-standalone
+    {% elif jira.app_name == 'atlassian-jira-software' %}
+      - {{ jira.prefix }}/atlassian-jira-software-{{ jira.version }}-standalone
     {% endif %}
       - {{ jira.home }}
       - {{ jira.log_root }}
