@@ -6,7 +6,7 @@
   <database-type>{{ jira.db_type }}</database-type>
   <schema-name>{{ jira.db_name }}</schema-name>
   <jdbc-datasource>
-    <url>jdbc:{{ jira.db_type_name }}://{{ jira.db_server }}:{{ jira.db_port }}/{{ jira.db_name }}?useSSL={{ jira.db_ssl }}</url>
+    <url>jdbc:{{ jira.db_type_name }}://address=(protocol={{jira.db_protocol}})(host={{jira.db_server}})(port={{jira.db_port}})/{{ jira.db_name }}?{{ jira.additional_jdbc_parameters }}</url>
     <driver-class>{{ jira.db_driver }}</driver-class>
     <username>{{ jira.db_username }}</username>
     <password>{{ jira.db_password }}</password>

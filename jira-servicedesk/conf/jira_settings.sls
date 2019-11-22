@@ -22,18 +22,17 @@
 {%- set default_jvm_Xmx      = '768m' %}
 {%- set default_jvm_MaxPermSize = '384m' %}
 
-
 {%- set default_mysql_connector_version = '5.1.47' %}
 {%- set default_mysql_location = 'http://dev.mysql.com/get/Downloads/Connector-J/' %}
+{%- set default_additional_jdbc_parameters = '' %}
 {%- set default_db_type      = 'postgresql72' %}
 {%- set default_db_driver    = 'org.postgresql.Driver' %}
 {%- set default_db_port      = '5432' %}
+{%- set default_db_protocol  = 'tcp' %}
 {%- set default_db_type_name      = 'postgresql' %}
 {%- set default_jira_hostname	  = 'localhost' %}
 
 {%- set default_use_https   = false %}
-
-
 
 {%- set version        = g.get('version', p.get('version', default_version)) %}
 {%- set prefix         = g.get('prefix', p.get('prefix', default_prefix)) %}
@@ -43,6 +42,8 @@
 {%- set jira_user      = g.get('user', p.get('user', default_jira_user)) %}
 {%- set jira_group     = g.get('group', p.get('group', default_jira_group)) %}
 {%- set db_server      = g.get('db_server', p.get('db_server', default_db_server)) %}
+{%- set db_protocol    = g.get('db_protocol', p.get('db_protocol', default_db_protocol)) %}
+{%- set additional_jdbc_parameters = g.get('additional_jdbc_parameters', p.get('additional_jdbc_parameters', default_additional_jdbc_parameters)) %}
 {%- set db_name        = g.get('db_name', p.get('db_name', default_db_name)) %}
 {%- set db_username    = g.get('db_username', p.get('db_username', default_db_username)) %}
 {%- set db_password    = g.get('db_password', p.get('db_password', default_db_password)) %}
@@ -80,6 +81,8 @@
                       'user'           : jira_user,
                       'group'          : jira_group,
                       'db_server'      : db_server,
+                      'additional_jdbc_parameters': additional_jdbc_parameters,
+                      'db_protocol'    : db_protocol,
                       'db_name'        : db_name,
                       'db_username'    : db_username,
                       'db_password'    : db_password,
@@ -97,5 +100,3 @@
                       'mysql_location' : mysql_location,
                       'mysql_connector_version': mysql_connector_version
                   }) %}
-
-
