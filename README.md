@@ -11,7 +11,7 @@ See the full [Salt Formulas installation and usage instructions](http://docs.sal
 
 
 ### jira
-Installing jira-servicedesk 
+Installing jira-servicedesk
 
 
 
@@ -41,6 +41,12 @@ Name of database (default: jira)
 ### jira:db_port
 Port for mysql/postgresql server
 
+### jira:db_protocol
+mysql/postgresql communication db_protocol
+
+### jira:additional_jdbc_parameters
+Additional parameters (i.e. `sessionVariables=default_storage_engine=InnoDB&useSSL=false`)
+
 ### jira:db_username
 Username for database (remember that it need to be set the same as for #mysql:server:root_user )
 
@@ -48,11 +54,11 @@ Username for database (remember that it need to be set the same as for #mysql:se
 Password for database user (remember that it need to be set the same as for #mysql:server:root_password)
 
 
-### jira:prefix 
-Prefix where jira should be installed, default /opt 
+### jira:prefix
+Prefix where jira should be installed, default /opt
 
 ### jira:jira_home
-Homedir where jira will keep data of this jira 
+Homedir where jira will keep data of this jira
 
 ### jira:jira_hostname
 Hostname, it's remember to setup that one the same as in #nginx:servers:managed:jira:server_name
@@ -66,7 +72,7 @@ User root for mysql
 ### mysql:server:root_password
 password for root user
 
-### mysql:datadir 
+### mysql:datadir
 Dir where mysql will keep data in
 
 ### mysql:database
@@ -85,7 +91,7 @@ as it's defining what will be server name for jira
 nginx:
   ng:
     server:
-      config: 
+      config:
         worker_processes: 4
         pid: /run/nginx.pid
         events:
@@ -99,9 +105,9 @@ nginx:
 
     servers:
       managed:
-        jira: 
+        jira:
           enabled: True
-          overwrite: True 
+          overwrite: True
           config:
             - server:
               - server_name: jira.somedomain.com
@@ -116,7 +122,7 @@ nginx:
                   - X-Forwarded-Server       
                   - $remote_addr
                 - proxy_set_header:   
-                  - X-Forwarded-for 
+                  - X-Forwarded-for
                   - $proxy_add_x_forwarded_for
                 - proxy_pass:
                    - http://localhost:8080
@@ -130,6 +136,3 @@ Dependencies
 - https://github.com/saltstack-formulas/mysql-formula
 - https://github.com/saltstack-formulas/nginx-formula
 - https://github.com/saltstack-formulas/sun-java-formula
-
-
-
