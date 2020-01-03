@@ -6,7 +6,7 @@ include:
   - sun-java.env
   - mysql
   - mysql.remove_test_database
-  - nginx.ng
+  - nginx
 {% if confluence.install == True %}
   - .confluence
 {% endif %}
